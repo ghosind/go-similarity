@@ -1,0 +1,16 @@
+package similarity_test
+
+import (
+	"testing"
+
+	"github.com/ghosind/go-assert"
+	"github.com/ghosind/go-similarity/similarity"
+)
+
+func TestJaccard(t *testing.T) {
+	a := assert.New(t)
+	j := similarity.Jaccard{}
+
+	a.True(isSameFloat64(1.0, j.Compare("", "")))
+	a.True(isSameFloat64(1.0/3.0, j.Compare("Test String1", "Test String2")))
+}
