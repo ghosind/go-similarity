@@ -13,11 +13,18 @@ type Cosine struct {
 }
 
 // Compare returns the similarity score between two strings by cosine similarity algorithm.
-func (c *Cosine) Compare(s1, s2 string) float64 {
-	t1 := c.getTokenizer().Tokenize(s1)
-	t2 := c.getTokenizer().Tokenize(s2)
+func (c *Cosine) Compare(s1, s2 string) (float64, error) {
+	t1, err := c.getTokenizer().Tokenize(s1)
+	if err != nil {
+		return 0, err
+	}
+	t2, err := c.getTokenizer().Tokenize(s2)
+	if err != nil {
+		return 0, err
+	}
+
 	if len(t1) == 0 && len(t2) == 0 {
-		return 1
+		return 1, nil
 	}
 
 	allTokens := set.NewHashSet[string]()
@@ -30,7 +37,7 @@ func (c *Cosine) Compare(s1, s2 string) float64 {
 	allTokens.AddAll(t2...)
 	commonTerms := (terms1 + terms2) - allTokens.Size()
 
-	return float64(commonTerms) / (math.Sqrt(float64(terms1)) * math.Sqrt(float64(terms2)))
+	return float64(commonTerms) / (math.Sqrt(float64(terms1)) * math.Sqrt(float64(terms2))), nil
 }
 
 func (c *Cosine) getTokenizer() tokenizer.Tokenizer {

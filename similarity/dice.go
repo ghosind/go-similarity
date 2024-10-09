@@ -12,11 +12,18 @@ type Dice struct {
 }
 
 // Compare returns the similarity score between two strings by dice similarity algorithm.
-func (d *Dice) Compare(s1, s2 string) float64 {
-	t1 := d.getTokenizer().Tokenize(s1)
-	t2 := d.getTokenizer().Tokenize(s2)
+func (d *Dice) Compare(s1, s2 string) (float64, error) {
+	t1, err := d.getTokenizer().Tokenize(s1)
+	if err != nil {
+		return 0, err
+	}
+	t2, err := d.getTokenizer().Tokenize(s2)
+	if err != nil {
+		return 0, err
+	}
+
 	if len(t1) == 0 && len(t2) == 0 {
-		return 1
+		return 1, nil
 	}
 
 	allTokens := set.NewHashSet[string]()
@@ -29,7 +36,7 @@ func (d *Dice) Compare(s1, s2 string) float64 {
 	allTokens.AddAll(t2...)
 	commonTerms := (terms1 + terms2) - allTokens.Size()
 
-	return float64(commonTerms*2.0) / float64(terms1+terms2)
+	return float64(commonTerms*2.0) / float64(terms1+terms2), nil
 }
 
 func (d *Dice) getTokenizer() tokenizer.Tokenizer {

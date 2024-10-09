@@ -11,6 +11,7 @@ func TestWhitespaceTokenizer(t *testing.T) {
 	a := assert.New(t)
 	tok := &tokenizer.WhitespaceTokenizer{}
 
-	res := tok.Tokenize("A B  C")
+	res, err := tok.Tokenize("A B  C")
+	a.NilNow(err)
 	a.Equal([]string{"A", "B", "C"}, res)
 }

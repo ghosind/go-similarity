@@ -11,17 +11,24 @@ type MatchingCoefficient struct {
 }
 
 // Compare returns the Matching Coefficient similarity between two strings.
-func (mc *MatchingCoefficient) Compare(s1, s2 string) float64 {
-	t1 := mc.getTokenizer().Tokenize(s1)
-	t2 := mc.getTokenizer().Tokenize(s2)
+func (mc *MatchingCoefficient) Compare(s1, s2 string) (float64, error) {
+	t1, err := mc.getTokenizer().Tokenize(s1)
+	if err != nil {
+		return 0, err
+	}
+	t2, err := mc.getTokenizer().Tokenize(s2)
+	if err != nil {
+		return 0, err
+	}
+
 	if len(t1) == 0 && len(t2) == 0 {
-		return 1
+		return 1, nil
 	}
 
 	totalPossible := max(len(t1), len(t2))
 	totalFound := mc.getUnNormalizedSimilarity(t1, t2)
 
-	return float64(totalFound) / float64(totalPossible)
+	return float64(totalFound) / float64(totalPossible), nil
 }
 
 func (mc *MatchingCoefficient) getUnNormalizedSimilarity(t1, t2 []string) int {

@@ -11,11 +11,18 @@ type Jaccard struct {
 }
 
 // Compare returns the Jaccard similarity between two strings.
-func (j *Jaccard) Compare(s1, s2 string) float64 {
-	t1 := j.getTokenizer().Tokenize(s1)
-	t2 := j.getTokenizer().Tokenize(s2)
+func (j *Jaccard) Compare(s1, s2 string) (float64, error) {
+	t1, err := j.getTokenizer().Tokenize(s1)
+	if err != nil {
+		return 0, err
+	}
+	t2, err := j.getTokenizer().Tokenize(s2)
+	if err != nil {
+		return 0, err
+	}
+
 	if len(t1) == 0 && len(t2) == 0 {
-		return 1
+		return 1, nil
 	}
 
 	allTokens := set.NewHashSet[string]()
@@ -28,7 +35,7 @@ func (j *Jaccard) Compare(s1, s2 string) float64 {
 	allTokens.AddAll(t2...)
 	commonTerms := (terms1 + terms2) - allTokens.Size()
 
-	return float64(commonTerms) / float64(allTokens.Size())
+	return float64(commonTerms) / float64(allTokens.Size()), nil
 }
 
 func (j *Jaccard) getTokenizer() tokenizer.Tokenizer {

@@ -12,18 +12,24 @@ type BlockDistance struct {
 }
 
 // Compare returns the similarity score between two strings by block distance algorithm.
-func (d *BlockDistance) Compare(s1, s2 string) float64 {
-	t1 := d.getTokenizer().Tokenize(s1)
-	t2 := d.getTokenizer().Tokenize(s2)
+func (d *BlockDistance) Compare(s1, s2 string) (float64, error) {
+	t1, err := d.getTokenizer().Tokenize(s1)
+	if err != nil {
+		return 0, err
+	}
+	t2, err := d.getTokenizer().Tokenize(s2)
+	if err != nil {
+		return 0, err
+	}
 
 	totalPossible := float64(len(t1) + len(t2))
 	if totalPossible == 0 {
-		return 1
+		return 1, nil
 	}
 
 	totalDistance := d.getUnNormalizedSimilarity(t1, t2)
 
-	return (totalPossible - totalDistance) / totalPossible
+	return (totalPossible - totalDistance) / totalPossible, nil
 }
 
 func (d *BlockDistance) getTokenizer() tokenizer.Tokenizer {

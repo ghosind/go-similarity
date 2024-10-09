@@ -11,6 +11,11 @@ func TestCosine(t *testing.T) {
 	a := assert.New(t)
 	cs := similarity.Cosine{}
 
-	a.True(isSameFloat64(1.0, cs.Compare("", "")))
-	a.True(isSameFloat64(0.5, cs.Compare("Test String1", "Test String2")))
+	score, err := cs.Compare("", "")
+	a.NilNow(err)
+	a.True(isSameFloat64(1.0, score))
+
+	score, err = cs.Compare("Test String1", "Test String2")
+	a.NilNow(err)
+	a.True(isSameFloat64(0.5, score))
 }

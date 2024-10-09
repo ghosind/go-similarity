@@ -11,6 +11,11 @@ func TestBlockDistance(t *testing.T) {
 	a := assert.New(t)
 	bd := similarity.BlockDistance{}
 
-	a.Equal(0.5, bd.Compare("Test String1", "Test String2"))
-	a.Equal(1.0, bd.Compare("", ""))
+	score, err := bd.Compare("Test String1", "Test String2")
+	a.NilNow(err)
+	a.Equal(0.5, score)
+
+	score, err = bd.Compare("", "")
+	a.NilNow(err)
+	a.Equal(1.0, score)
 }

@@ -11,6 +11,11 @@ func TestDice(t *testing.T) {
 	a := assert.New(t)
 	d := similarity.Dice{}
 
-	a.True(isSameFloat64(1.0, d.Compare("", "")))
-	a.True(isSameFloat64(0.5, d.Compare("Test String1", "Test String2")))
+	score, err := d.Compare("", "")
+	a.NilNow(err)
+	a.True(isSameFloat64(1.0, score))
+
+	score, err = d.Compare("Test String1", "Test String2")
+	a.NilNow(err)
+	a.True(isSameFloat64(0.5, score))
 }

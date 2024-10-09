@@ -11,6 +11,11 @@ func TestEuclideanDistance(t *testing.T) {
 	a := assert.New(t)
 	ed := similarity.EuclideanDistance{}
 
-	a.True(isSameFloat64(1.0, ed.Compare("", "")))
-	a.True(isSameFloat64(0.5, ed.Compare("Test String1", "Test String2")))
+	score, err := ed.Compare("", "")
+	a.NilNow(err)
+	a.True(isSameFloat64(1.0, score))
+
+	score, err = ed.Compare("Test String1", "Test String2")
+	a.NilNow(err)
+	a.True(isSameFloat64(0.5, score))
 }

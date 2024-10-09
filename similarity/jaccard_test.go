@@ -11,6 +11,11 @@ func TestJaccard(t *testing.T) {
 	a := assert.New(t)
 	j := similarity.Jaccard{}
 
-	a.True(isSameFloat64(1.0, j.Compare("", "")))
-	a.True(isSameFloat64(1.0/3.0, j.Compare("Test String1", "Test String2")))
+	score, err := j.Compare("", "")
+	a.NilNow(err)
+	a.True(isSameFloat64(1.0, score))
+
+	score, err = j.Compare("Test String1", "Test String2")
+	a.NilNow(err)
+	a.True(isSameFloat64(1.0/3.0, score))
 }

@@ -14,18 +14,24 @@ type EuclideanDistance struct {
 }
 
 // Compare returns the similarity score between two strings by Euclidean distance algorithm.
-func (ed *EuclideanDistance) Compare(s1, s2 string) float64 {
-	t1 := ed.getTokenizer().Tokenize(s1)
-	t2 := ed.getTokenizer().Tokenize(s2)
+func (ed *EuclideanDistance) Compare(s1, s2 string) (float64, error) {
+	t1, err := ed.getTokenizer().Tokenize(s1)
+	if err != nil {
+		return 0, err
+	}
+	t2, err := ed.getTokenizer().Tokenize(s2)
+	if err != nil {
+		return 0, err
+	}
 
 	totalPossible := math.Sqrt(float64(len(t1))*float64(len(t1)) + float64(len(t2))*float64(len(t2)))
 	if totalPossible == 0 {
-		return 1
+		return 1, nil
 	}
 
 	totalDistance := ed.euclideanDistance(t1, t2)
 
-	return (totalPossible - totalDistance) / totalPossible
+	return (totalPossible - totalDistance) / totalPossible, nil
 }
 
 func (ed *EuclideanDistance) getTokenizer() tokenizer.Tokenizer {

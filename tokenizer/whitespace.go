@@ -7,6 +7,6 @@ type WhitespaceTokenizer struct {
 	Tokenizer
 }
 
-func (t *WhitespaceTokenizer) Tokenize(input string) []string {
-	return strings.Fields(input)
+func (t *WhitespaceTokenizer) Tokenize(input string) ([]string, error) {
+	return strings.Fields(input), nil
 }
