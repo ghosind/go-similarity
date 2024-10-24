@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/ghosind/collection v0.2.0
-	github.com/ghosind/go-assert v1.1.0
+	github.com/ghosind/go-assert v1.1.1
 )
 
 require (
