@@ -13,9 +13,9 @@ func TestEuclideanDistance(t *testing.T) {
 
 	score, err := ed.Compare("", "")
 	a.NilNow(err)
-	a.True(isSameFloat64(1.0, score))
+	a.FloatEqual(score, 1.0, epsilon)
 
 	score, err = ed.Compare("Test String1", "Test String2")
 	a.NilNow(err)
-	a.True(isSameFloat64(0.5, score))
+	a.FloatEqualNow(score, 0.5, epsilon)
 }

@@ -13,9 +13,9 @@ func TestMatchingCoefficient(t *testing.T) {
 
 	score, err := mc.Compare("", "")
 	a.NilNow(err)
-	a.True(isSameFloat64(1.0, score))
+	a.FloatEqualNow(score, 1.0, epsilon)
 
 	score, err = mc.Compare("Test String1", "Test String2")
 	a.NilNow(err)
-	a.True(isSameFloat64(0.5, score))
+	a.FloatEqual(score, 0.5, epsilon)
 }

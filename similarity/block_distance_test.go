@@ -13,9 +13,9 @@ func TestBlockDistance(t *testing.T) {
 
 	score, err := bd.Compare("Test String1", "Test String2")
 	a.NilNow(err)
-	a.Equal(0.5, score)
+	a.FloatEqual(score, 0.5, epsilon)
 
 	score, err = bd.Compare("", "")
 	a.NilNow(err)
-	a.Equal(1.0, score)
+	a.FloatEqual(score, 1.0, epsilon)
 }

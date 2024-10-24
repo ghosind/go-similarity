@@ -13,9 +13,9 @@ func TestDice(t *testing.T) {
 
 	score, err := d.Compare("", "")
 	a.NilNow(err)
-	a.True(isSameFloat64(1.0, score))
+	a.FloatEqual(score, 1.0, epsilon)
 
 	score, err = d.Compare("Test String1", "Test String2")
 	a.NilNow(err)
-	a.True(isSameFloat64(0.5, score))
+	a.FloatEqual(score, 0.5, epsilon)
 }

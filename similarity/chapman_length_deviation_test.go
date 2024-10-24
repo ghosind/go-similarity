@@ -13,17 +13,17 @@ func TestChapmanLengthDeviation(t *testing.T) {
 
 	score, err := cld.Compare("", "")
 	a.NilNow(err)
-	a.Equal(1.0, score)
+	a.FloatEqual(score, 1.0, epsilon)
 
 	score, err = cld.Compare("Test String1", "Test String2")
 	a.NilNow(err)
-	a.Equal(1.0, score)
+	a.FloatEqual(score, 1.0, epsilon)
 
 	score, err = cld.Compare("ABC", "ABCDEF")
 	a.NilNow(err)
-	a.Equal(0.5, score)
+	a.FloatEqual(score, 0.5, epsilon)
 
 	score, err = cld.Compare("ABCDEF", "ABC")
 	a.NilNow(err)
-	a.Equal(0.5, score)
+	a.FloatEqual(score, 0.5, epsilon)
 }

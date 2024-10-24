@@ -13,9 +13,9 @@ func TestJaccard(t *testing.T) {
 
 	score, err := j.Compare("", "")
 	a.NilNow(err)
-	a.True(isSameFloat64(1.0, score))
+	a.FloatEqual(score, 1.0, epsilon)
 
 	score, err = j.Compare("Test String1", "Test String2")
 	a.NilNow(err)
-	a.True(isSameFloat64(1.0/3.0, score))
+	a.FloatEqual(score, 1.0/3.0, epsilon)
 }
