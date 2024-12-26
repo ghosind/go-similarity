@@ -36,6 +36,7 @@ fmt.Println(similarity)
 - [Dice Coefficient](https://en.wikipedia.org/wiki/S%C3%B8rensen%E2%80%93Dice_coefficient)
 - [Euclidean Distance](https://en.wikipedia.org/wiki/Euclidean_distance)
 - [Jaccard Coefficient](https://en.wikipedia.org/wiki/Jaccard_index)
+- [Levenshtein Distance](https://en.wikipedia.org/wiki/Levenshtein_distance)
 - Matching Coefficient
 - [Overlap Coefficient](https://en.wikipedia.org/wiki/Overlap_coefficient)
 
