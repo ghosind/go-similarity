@@ -1,4 +1,4 @@
-package cost_function
+package cost_func
 
 import "github.com/ghosind/collection/set"
 

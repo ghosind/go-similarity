@@ -1,4 +1,4 @@
-package cost_function
+package cost_func
 
 type SubCost01 struct{}
 

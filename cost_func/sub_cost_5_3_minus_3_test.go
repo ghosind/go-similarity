@@ -1,15 +1,15 @@
-package cost_function_test
+package cost_func_test
 
 import (
 	"testing"
 
 	"github.com/ghosind/go-assert"
-	"github.com/ghosind/go-similarity/cost_function"
+	"github.com/ghosind/go-similarity/cost_func"
 )
 
 func TestSubCost5_3Minus3(t *testing.T) {
 	a := assert.New(t)
-	f := new(cost_function.SubCost5_3Minus3)
+	f := new(cost_func.SubCost5_3Minus3)
 
 	s1 := "hello world AAAAAAA BBB ABCDEF this is a test"
 	s2 := "jello wrd AAAAAAA BBB ABCDEF this is a test"
