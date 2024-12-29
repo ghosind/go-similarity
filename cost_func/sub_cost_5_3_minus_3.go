@@ -23,16 +23,25 @@ type SubCost5_3Minus3 struct{}
 
 func (f *SubCost5_3Minus3) Cost(s1 string, i1 int, s2 string, i2 int) float64 {
 	if len(s1) <= i1 || len(s2) <= i2 {
-		return subCost5_3Minus3_Mismatch
+		return f.GetMinCost()
 	}
 
 	if s1[i1] == s2[i2] {
-		return subCost5_3Minus3_Exact_Match
+		return f.GetMaxCost()
 	}
+
 	for _, approx := range subCost5_3Minus3_approx {
 		if approx.Contains(s1[i1]) && approx.Contains(s2[i2]) {
 			return subCost5_3Minus3_Approx_Match
 		}
 	}
+	return f.GetMinCost()
+}
+
+func (f *SubCost5_3Minus3) GetMaxCost() float64 {
+	return subCost5_3Minus3_Exact_Match
+}
+
+func (f *SubCost5_3Minus3) GetMinCost() float64 {
 	return subCost5_3Minus3_Mismatch
 }
