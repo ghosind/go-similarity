@@ -38,6 +38,7 @@ fmt.Println(similarity)
 - [Jaccard Coefficient](https://en.wikipedia.org/wiki/Jaccard_index)
 - [Levenshtein Distance](https://en.wikipedia.org/wiki/Levenshtein_distance)
 - Matching Coefficient
+- [Needleman Wunsch](https://en.wikipedia.org/wiki/Needleman%E2%80%93Wunsch_algorithm)
 - [Overlap Coefficient](https://en.wikipedia.org/wiki/Overlap_coefficient)
 
 ## Builtin Tokenizers
